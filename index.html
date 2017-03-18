@@ -270,6 +270,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/18/raspi-connect/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="洛旭">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="洛旭的马棚">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/18/raspi-connect/" itemprop="url">
+                  raspi-connect
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-18T21:26:55+08:00">
+                2017-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/18/raspi-connect/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/18/raspi-connect/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="最近做毕设用的树莓派0，总结一下usb网卡和wifi-8188eu安装过程"><a href="#最近做毕设用的树莓派0，总结一下usb网卡和wifi-8188eu安装过程" class="headerlink" title="最近做毕设用的树莓派0，总结一下usb网卡和wifi 8188eu安装过程"></a>最近做毕设用的树莓派0，总结一下usb网卡和wifi 8188eu安装过程</h1><h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><ul>
+<li>一个树莓派</li>
+<li>一张sd卡,以及读卡器</li>
+<li>mini micro 公 转 hdmi/vga 母 线 (连接显示屏)</li>
+<li>OTG 转 usb 供电线 (以前的安卓线即可)</li>
+<li>OTG 转 USB-HUB</li>
+<li>usb键盘,显示屏,usb网卡/无线网卡</li>
+</ul>
+<h2 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h2><ol>
+<li>官网上下raspbian系统,pixel带GUI。</li>
+<li>SDFormatter,Win32DiskImager分别格式化以及写系统</li>
+<li>启动 登录 pi;raspberry</li>
+<li>sudo raspi-config interfaces那一栏enable SSH</li>
+<li>USB网卡一边用校园网一边连到usb-hub。参考<a href="http://blog.csdn.net/cxhome213/article/details/8983247" target="_blank" rel="external">http://blog.csdn.net/cxhome213/article/details/8983247</a><br><strong> 感觉没啥用，我是树莓派重启之后连到显示的ip </strong></li>
+<li>因为我买的无线网卡树莓派不能识别，要装驱动，参考<br><a href="https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982" target="_blank" rel="external">https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982</a><br> 我的系统是4.4.50+ #970 则<br> wget <a href="http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz" target="_blank" rel="external">http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz</a><br> 输入命令后出错 no data received 因此用windows下载上述压缩包通过filezilla传到树莓派，解压缩，添加权限chmod +x  install.sh 之后./install.sh运行<br> 装好驱动之后<br> sudo nano /etc/network/interfaces<br> 修改wifi设置<br> auto wlan0<br> allow-hotplug wlan0<br> iface wlan0 inet dhcp<br> wireless-essid name_of_wifi_without””<br> 设置密码<br> sudo nano /etc/wpa_supplicant/wpa_supplicant.conf<br> 添加<br> network={<br> ssid = “name_of_wifi”<br> psk=”wifi_password”<br> }<br> 重启或者刷新网络就可以了，路由器dhcp绑定ip和mac地址就可以通过putty不需要显示屏就可以连接了<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2></li>
+</ol>
+<ul>
+<li>usb网卡无法通过笔记本分享</li>
+<li>netsh wlan show profile name=”Profile-Name” 获取wifi密码</li>
+<li>少看中文资料</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/Hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -358,9 +509,14 @@
         
           
             <h1 id="重新搭建Hexo"><a href="#重新搭建Hexo" class="headerlink" title="重新搭建Hexo"></a>重新搭建Hexo</h1><p>自从之前hexo装好，犯蠢用hexo init给删除了之后一直没来搞它，现在重新搞起来，重新搭建的过程同样发生了之前搭建时候遇到的一些问题，又花了一点时间，这提醒了我博客应该作为学习的记录</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先安装git，nodejs<br>打开git bash 输入<br>$ npm install -g hexo -cli</p>
-<h2 id="这样就安装了hexo了"><a href="#这样就安装了hexo了" class="headerlink" title="这样就安装了hexo了"></a>这样就安装了hexo了</h2><p>其次安装server,deployer(这里视需要翻墙)<br>$ npm install hexo-deployer-git –save<br>$ npm install hexo-server –save<br>现在可以开始了</p>
-<p>$ npm install hexo-cli -g<br>$ hexo init blog<br>$ cd blog<br>$ npm install<br>$ hexo server<br>上面的hexo server 可以简写或者指定端口如<br>    hexo s -p 2200</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先安装git，nodejs<br>打开git bash 输入<br>    npm install -g hexo -cli</p>
+<h2 id="这样就安装了hexo了"><a href="#这样就安装了hexo了" class="headerlink" title="这样就安装了hexo了"></a>这样就安装了hexo了</h2><p>其次安装server,deployer(这里视需要翻墙)<br>    npm install hexo-deployer-git –save<br>    npm install hexo-server –save<br>现在可以开始了</p>
+<pre><code>npm install hexo-cli -g
+hexo init blog
+cd blog
+npm install
+hexo server
+</code></pre><p>上面的hexo server 可以简写或者指定端口如<br>    hexo s -p 2200</p>
 <h2 id="这样就可以在localhost-2200访问了"><a href="#这样就可以在localhost-2200访问了" class="headerlink" title="这样就可以在localhost:2200访问了"></a>这样就可以在localhost:2200访问了</h2><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ul>
 <li>新建github repository</li>
 <li>名字有限定为注册 用户名.github.io</li>
@@ -595,7 +751,7 @@ branch: master
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -608,7 +764,7 @@ branch: master
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
