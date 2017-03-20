@@ -357,7 +357,8 @@
       
         
           
-            <h1 id="最近做毕设用的树莓派0，总结一下usb网卡和wifi-8188eu安装过程"><a href="#最近做毕设用的树莓派0，总结一下usb网卡和wifi-8188eu安装过程" class="headerlink" title="最近做毕设用的树莓派0，总结一下usb网卡和wifi 8188eu安装过程"></a>最近做毕设用的树莓派0，总结一下usb网卡和wifi 8188eu安装过程</h1><h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><ul>
+            <p>最近做毕设用的树莓派0，总结一下usb网卡和wifi 8188eu安装过程</p>
+<h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><ul>
 <li>一个树莓派</li>
 <li>一张sd卡,以及读卡器</li>
 <li>mini micro 公 转 hdmi/vga 母 线 (连接显示屏)</li>
@@ -365,17 +366,19 @@
 <li>OTG 转 USB-HUB</li>
 <li>usb键盘,显示屏,usb网卡/无线网卡</li>
 </ul>
-<h2 id="装系统"><a href="#装系统" class="headerlink" title="装系统"></a>装系统</h2><ol>
+<h2 id="安装系统及配置网络"><a href="#安装系统及配置网络" class="headerlink" title="安装系统及配置网络"></a>安装系统及配置网络</h2><ol>
 <li>官网上下raspbian系统,pixel带GUI。</li>
 <li>SDFormatter,Win32DiskImager分别格式化以及写系统</li>
 <li>启动 登录 pi;raspberry</li>
 <li>sudo raspi-config interfaces那一栏enable SSH</li>
 <li>USB网卡一边用校园网一边连到usb-hub。参考<a href="http://blog.csdn.net/cxhome213/article/details/8983247" target="_blank" rel="external">http://blog.csdn.net/cxhome213/article/details/8983247</a><br><strong> 感觉没啥用，我是树莓派重启之后连到显示的ip </strong></li>
-<li>因为我买的无线网卡树莓派不能识别，要装驱动，参考<br><a href="https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982" target="_blank" rel="external">https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982</a><br> 我的系统是4.4.50+ #970 则<br> wget <a href="http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz" target="_blank" rel="external">http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz</a><br> 输入命令后出错 no data received 因此用windows下载上述压缩包通过filezilla传到树莓派，解压缩，添加权限chmod +x  install.sh 之后./install.sh运行<br> 装好驱动之后<br> sudo nano /etc/network/interfaces<br> 修改wifi设置<br> auto wlan0<br> allow-hotplug wlan0<br> iface wlan0 inet dhcp<br> wireless-essid name_of_wifi_without””<br> 设置密码<br> sudo nano /etc/wpa_supplicant/wpa_supplicant.conf<br> 添加<br> network={<br> ssid = “name_of_wifi”<br> psk=”wifi_password”<br> }<br> 重启或者刷新网络就可以了，路由器dhcp绑定ip和mac地址就可以通过putty不需要显示屏就可以连接了<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2></li>
+<li>因为我买的无线网卡树莓派不能识别，要装驱动，参考<br><a href="https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982" target="_blank" rel="external">https://www.raspberrypi.org/forums/viewtopic.php?p=462982#p462982</a><br> 我的系统是4.4.50+ #970 则<br> wget <a href="http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz" target="_blank" rel="external">http://www.fars-robotics.net/8188eu-4.4.50-970.tar.gz</a><br> 输入命令后出错 no data received 因此用windows下载上述压缩包通过filezilla传到树莓派，解压缩，添加权限chmod +x  install.sh 之后./install.sh运行<br> 装好驱动之后<br> sudo nano /etc/network/interfaces<br> 修改wifi设置<br> auto wlan0<br> allow-hotplug wlan0<br> iface wlan0 inet dhcp<br> wireless-essid name_of_wifi_without””<br> 设置密码<br> sudo nano /etc/wpa_supplicant/wpa_supplicant.conf<br> 添加<br> network={<br> ssid = “name_of_wifi”<br> psk=”wifi_password”<br> }<br> 重启或者刷新网络就可以了，路由器dhcp绑定ip和mac地址就可以通过putty不需要显示屏就可以连接了<h2 id="配置多个wifi网络"><a href="#配置多个wifi网络" class="headerlink" title="配置多个wifi网络"></a>配置多个wifi网络</h2></li>
 </ol>
 <ul>
+<li>首先在etc/network/interfaces 新增wlan，照着wlan0写就可以</li>
+<li>在wpa_supplicant.conf添加多个network元素，分别填写ssid和psk，添加priority属性，属性值为数字，数字越大越优先连接 比如我设置了1，3，5三个wifi的priority属性值<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2></li>
 <li>usb网卡无法通过笔记本分享</li>
-<li>netsh wlan show profile name=”Profile-Name” 获取wifi密码</li>
+<li>netsh wlan show profile name=”Profile-Name” key=clear 获取wifi密码</li>
 <li>少看中文资料</li>
 </ul>
 
